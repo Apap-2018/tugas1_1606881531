@@ -1,10 +1,14 @@
 package com.apap2018.tugas1.model;
 
+import com.apap2018.tugas1.repository.Provinsi;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "pegawai")
@@ -38,6 +42,89 @@ public class PegawaiModel implements Serializable {
     @Column(name = "tahun_masuk", nullable = false)
     private String tahunMasuk;
 
-    // TODO many to one ke instansi
-    // TODO many to many buat ke Jabatan
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_instansi", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private InstansiModel instansi;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "jabatan_pegawai", joinColumns = { @JoinColumn(name = "id_pegawai") }, inverseJoinColumns = { @JoinColumn(name = "id_jabatan") })
+    private Set<JabatanModel> jabatan = new HashSet<>(); //If gone wrong, use list
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getTempatLahir() {
+        return tempatLahir;
+    }
+
+    public void setTempatLahir(String tempatLahir) {
+        this.tempatLahir = tempatLahir;
+    }
+
+    public Date getTanggalLahir() {
+        return tanggalLahir;
+    }
+
+    public void setTanggalLahir(Date tanggalLahir) {
+        this.tanggalLahir = tanggalLahir;
+    }
+
+    public String getTahunMasuk() {
+        return tahunMasuk;
+    }
+
+    public void setTahunMasuk(String tahunMasuk) {
+        this.tahunMasuk = tahunMasuk;
+    }
+
+    public InstansiModel getInstansi() {
+        return instansi;
+    }
+
+    public void setInstansi(InstansiModel instansi) {
+        this.instansi = instansi;
+    }
+
+    public Set<JabatanModel> getJabatan() {
+        return jabatan;
+    }
+
+    public void setJabatan(Set<JabatanModel> jabatan) {
+        this.jabatan = jabatan;
+    }
+
+    public double getGaji() {
+        double gajiMax = Double.MIN_VALUE;
+        InstansiModel instansiModel = getInstansi();
+        ProvinsiModel provinsiModel = instansiModel.getProvinsi(); // Gotta be like this. Idk why. But it must.
+        double tunjangan = provinsiModel.getPresentaseTunjangan() / 100;
+
+        for (JabatanModel jm : getJabatan()) {
+            if (jm.getGajiPokok() > gajiMax) gajiMax = jm.getGajiPokok();
+        }
+
+        return gajiMax + (tunjangan * gajiMax);
+    }
 }
