@@ -13,26 +13,27 @@
         <div class="col-sm">
             <!--This is middle-->
             <div class="card">
-                <div class="card-header" th:text="${status} == null ? 'Silahkan isi identitas pegawai baru.' : ${status}">
+                <div class="card-header">
+                    Silahkan isi identitas pegawai baru.
                 </div>
                 <div class="card-body">
                     <form th:action="@{/pegawai/tambah}" th:object="${pegawaiBaru}" method="POST">
                         <table>
                             <tr>
                                 <td>Nama</td>
-                                <td><input type="text" name="nama" /></td>
+                                <td><input type="text" th:field="*{nama}" /></td>
                             </tr>
                             <tr>
                                 <td>Tempat Lahir</td>
-                                <td><input type="text" name="tempatLahir" /></td>
+                                <td><input type="text" th:field="*{tempatLahir}" /></td>
                             </tr>
                             <tr>
                                 <td>Tanggal Lahir</td>
-                                <td><input type="date" name="tanggalLahir" /></td>
+                                <td><input type="date" th:field="*{tanggalLahir}" /></td>
                             </tr>
                             <tr>
                                 <td>Tahun Masuk</td>
-                                <td><input type="text" name="tahunMasuk" /></td>
+                                <td><input type="text" th:field="*{tahunMasuk}" /></td>
                             </tr>
                             <!--TODO insert provinsi, instansi, dan jabatan di sini-->
                             <tr>

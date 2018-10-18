@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home</title>
+    <title>Jabatan Tambah</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
@@ -13,28 +13,37 @@
         <div class="col-sm">
             <!--This is middle-->
             <div class="card">
-                <div class="card-header" th:text="${status} == null ? 'Silahkan isi identitas pegawai baru.' : ${status}">
+                <div class="card-header" th:text="${status} == null ? 'Silahkan isi jabatan baru.' : ${status}">
+
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/pegawai/tambah}" th:object="${pegawaiBaru}" method="POST">
+                    <form th:action="@{/jabatan/tambah}" th:object="${jabatanBaru}" method="POST">
+
                         <table>
                             <tr>
-                                <td>Nama</td>
-                                <td><input type="text" name="nama" /></td>
+                                <td>
+                                    Nama
+                                </td>
+                                <td>
+                                    <input type="text" name="nama"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td>Tempat Lahir</td>
-                                <td><input type="text" name="tempatLahir" /></td>
+                                <td>
+                                    Deskripsi
+                                </td>
+                                <td>
+                                    <input type="text" name="deskripsi"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td>Tanggal Lahir</td>
-                                <td><input type="date" name="tanggalLahir" /></td>
+                                <td>
+                                    Gaji Pokok
+                                </td>
+                                <td>
+                                    <input type="number" name="gajiPokok"/>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>Tahun Masuk</td>
-                                <td><input type="text" name="tahunMasuk" /></td>
-                            </tr>
-                            <!--TODO insert provinsi, instansi, dan jabatan di sini-->
                             <tr>
                                 <td>
                                     <button type="submit" class="btn btn-light">Submit</button>
@@ -49,11 +58,6 @@
     </div>
 </div>
 </body>
-
-<!--TODO jquery but for dropdown instansi-->
-<script>
-
-</script>
-
 </html>
+
 <!--Made with love, by Dihar.-->

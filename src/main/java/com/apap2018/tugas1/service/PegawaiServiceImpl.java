@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 
 @Service
 @Transactional
@@ -22,5 +23,10 @@ public class PegawaiServiceImpl implements PegawaiService{
     @Override
     public void addPegawai(PegawaiModel pegawai) {
         pegawaiDb.save(pegawai);
+    }
+
+    @Override
+    public long countByTanggalLahirAndTahunMasuk(Date tanggalLahir, String tahun) {
+        return pegawaiDb.countByTanggalLahirAndTahunMasuk(tanggalLahir, tahun);
     }
 }

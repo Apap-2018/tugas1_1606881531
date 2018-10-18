@@ -1,5 +1,7 @@
 package com.apap2018.tugas1.service;
 
-public interface InstansiService {
+import com.apap2018.tugas1.model.InstansiModel;
 
+public interface InstansiService {
+    InstansiModel testOneInstansiModel();
 }
