@@ -38,8 +38,20 @@
                             <select name = "idJabatan">
                                 <option th:each="jabatan : ${jabatanList}" th:value="${jabatan.id}" th:text="${jabatan.nama}"></option>
                             </select>
-                            <button type="submit" class="btn btn-light">Submit</button>
-                            <button type="submit" class="btn btn-light" th:formaction="@{/jabatan/ubah}">Submit</button>
+                            <button type="submit" class="btn btn-light">Lihat Jabatan</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Lihat Pegawai Termuda dan Tertua
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/pegawai/termuda-tertua}" method="GET">
+                            <select name = "idInstansi">
+                                <option th:each="instansi : ${instansiList}" th:value="${instansi.id}" th:text="${instansi.getNamadanProvinsi()}"></option>
+                            </select>
+                            <button type="submit" class="btn btn-light">Lihat</button>
                         </form>
                     </div>
                 </div>

@@ -13,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class PegawaiController {
@@ -35,6 +33,7 @@ public class PegawaiController {
     @RequestMapping("/")
     private String home(Model model) {
         model.addAttribute("jabatanList", jabatanService.getAllJabatan());
+        model.addAttribute("instansiList", instansiService.getAllInstansi());
         return "home";
     }
 
@@ -91,5 +90,51 @@ public class PegawaiController {
         pegawaiService.addPegawai(pegawai);
         model.addAttribute("status", "SUKSES");
         return "pegawai-tambah";
+    }
+
+    @RequestMapping(value = "/pegawai/cari", method = RequestMethod.GET)
+    public String cariPegawai(@RequestParam(value = "idProvinsi", required = false) Optional<Long> idProvinsi
+            , @RequestParam(value = "idInstansi", required = false) Optional<Long> idInstansi
+            , @RequestParam(value = "idJabatan", required = false) Optional<Long> idJabatan
+            , Model model) {
+        if (idProvinsi.isPresent() || idJabatan.isPresent() || idInstansi.isPresent()) {
+            List<PegawaiModel> semuaPegawai = pegawaiService.getAllPegawai(); //ib4 "har ini kan gak efisien"
+            if (idProvinsi.isPresent()) {
+                semuaPegawai.removeIf(i -> !(i.getInstansi().getProvinsi().getId() == idProvinsi.get()));
+            }
+            if (idJabatan.isPresent()) {
+                semuaPegawai.removeIf(i -> !(jabatanExist(i,idJabatan.get())));
+            }
+            if (idInstansi.isPresent()) {
+                semuaPegawai.removeIf(i -> !(i.getInstansi().getId() == idInstansi.get()));
+            }
+            model.addAttribute("pegawaiFiltered", semuaPegawai);
+        }
+        model.addAttribute("provinsiAll", provinsiService.getAllProvinsi());
+        model.addAttribute("instansiAll", instansiService.getAllInstansi());
+        model.addAttribute("jabatanAll", jabatanService.getAllJabatan());
+        return "pegawai-cari-spesifik";
+    }
+
+    @RequestMapping(value = "/pegawai/termuda-tertua", method = RequestMethod.GET)
+    public String pegawaiTermudaTertua(@RequestParam("idInstansi") Long idInstansi, Model model) {
+        List<PegawaiModel> pegawaiInstansi = pegawaiService.getPegawaiByInstansiId(idInstansi);
+        pegawaiInstansi.sort(new Comparator<PegawaiModel>() {
+            @Override
+            public int compare(PegawaiModel o1, PegawaiModel o2) {
+                return o1.getTanggalLahir().compareTo(o2.getTanggalLahir());
+            }
+        });
+
+        model.addAttribute("tertua", pegawaiInstansi.get(0));
+        model.addAttribute("termuda", pegawaiInstansi.get(pegawaiInstansi.size() - 1));
+        return "pegawai-termuda-tertua"; //TODO buat page ini
+    }
+
+    public boolean jabatanExist(PegawaiModel pegawai, Long idJabatan){
+        for (JabatanModel jb : pegawai.getJabatan()) {
+            if (jb.getId() == idJabatan) return true;
+        }
+        return false;
     }
 }

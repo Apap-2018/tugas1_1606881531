@@ -22,4 +22,9 @@ public class ProvinsiServiceImpl implements ProvinsiService {
         ordered.sort((o1, o2) -> o1.getNama().compareTo(o2.getNama()));
         return ordered;
     }
+
+    @Override
+    public List<ProvinsiModel> getAllProvinsi() {
+        return provinsiDb.findAll();
+    }
 }

@@ -29,6 +29,24 @@
                             <td>Gaji Pokok</td>
                             <td th:text="'Rp.' + ${jabatan.gajiPokok}"></td>
                         </tr>
+                        <tr>
+                            <td>Jumlah Pegawai</td>
+                            <td th:text="${pegawaiCount}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form th:action="@{/jabatan/ubah}" method="GET">
+                                    <input type="hidden" th:value="${jabatan.getId()}" name="idJabatan"/>
+                                    <button type="submit" class="btn btn-light">Ubah Jabatan</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/jabatan/hapus}" method="POST">
+                                    <input type="hidden" th:value="${jabatan.id}" name="id"/>
+                                    <button type="submit" class="btn btn-light">Hapus Jabatan</button>
+                                </form>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>

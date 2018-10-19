@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hapus Jabatan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+            <!--This is middle-->
+            <div class="card">
+                <div class="card-header" th:text="${status}">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>
+</body>
+</html>
+
+<!--Made with love, by Dihar.-->

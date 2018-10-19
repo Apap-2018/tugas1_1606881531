@@ -1,5 +1,6 @@
 package com.apap2018.tugas1.repository;
 
+import com.apap2018.tugas1.model.InstansiModel;
 import com.apap2018.tugas1.model.JabatanModel;
 import com.apap2018.tugas1.model.PegawaiModel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,7 @@ public interface PegawaiDb extends JpaRepository<PegawaiModel, Long> {
     List<PegawaiModel> findAllByNip(String nip);
     List<PegawaiModel> findByJabatan(JabatanModel jabatanModel);
     long countByTanggalLahirAndTahunMasuk(Date tangalLahir, String tahunMasuk);
+    long countByJabatan(JabatanModel jm);
+
+    List<PegawaiModel> findByInstansi(InstansiModel instansi);
 }

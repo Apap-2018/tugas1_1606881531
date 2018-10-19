@@ -16,22 +16,22 @@
                 <div class="card-header" th:text="${status} == null ? 'Silahkan mengubah jabatan' : ${status}"></div>
                 <div class="card-body">
                     <form th:action="@{/jabatan/ubah}" th:object="${jabatan}" method="POST">
-                        <input type="hidden" name="id" th:value="*{id}" />
+                        <input type="hidden" name="id" th:value="*{id}">
                         <table>
                             <tr>
                                 <td>
                                     Nama
                                 </td>
                                 <td>
-                                    <input type="text" name="nama" th:value="*{nama}"/>
+                                    <input type="text" name="nama" th:value="*{nama}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Deskripsi
+                                    Deksripsi
                                 </td>
                                 <td>
-                                    <input type="text" name="deskripsi" th:value="*{deskripsi}"/>
+                                    <input type="text" name="deskripsi" th:value="*{deskripsi}">
                                 </td>
                             </tr>
                             <tr>
@@ -39,12 +39,12 @@
                                     Gaji Pokok
                                 </td>
                                 <td>
-                                    <input type="number"  name="gajiPokok" th:value="*{gajiPokok}"/>
+                                    <input type="number" name="gajiPokok" th:value="*{gajiPokok}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <button type="submit" class="btn btn-light">Submit</button>
+                                    <button type="submit">Submit</button>
                                 </td>
                             </tr>
                         </table>

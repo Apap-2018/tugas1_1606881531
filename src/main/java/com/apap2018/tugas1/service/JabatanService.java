@@ -11,4 +11,8 @@ public interface JabatanService {
     JabatanModel getJabatanById(Long idBeneran);
 
     List<JabatanModel> getAllJabatan();
+
+    void deleteJabatanModel(long jabatanId);
+
+    long getPegawaiCountById(Long id);
 }

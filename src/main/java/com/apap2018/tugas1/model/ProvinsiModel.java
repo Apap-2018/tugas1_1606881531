@@ -12,11 +12,12 @@ public class ProvinsiModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
     @NotNull
     @Size(max = 255)
-    @Column(name = "name", nullable = false)
+    @Column(name = "nama", nullable = false)
     private String nama;
 
     @NotNull

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ProvinsiService {
     List<ProvinsiModel> getAllProvinsiOrderedAsc();
+
+    List<ProvinsiModel> getAllProvinsi();
 }

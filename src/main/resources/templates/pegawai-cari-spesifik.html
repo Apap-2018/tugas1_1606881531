@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pegawai Cari</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <form th:action="@{/pegawai/cari}" method="GET">
+            <table>
+                <tr>
+                    <td>
+                        <select name="idProvinsi">
+                            <option selected th:value="null">Silahkan Pilih Provinsi...</option>
+                            <option th:each="provinsi : ${provinsiAll}" th:value="${provinsi.id}" th:text="${provinsi.nama}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="idInstansi">
+                            <option selected th:value="null">Silahkan Pilih Instansi...</option>
+                            <option th:each="instansi : ${instansiAll}" th:value="${instansi.id}" th:text="${instansi.getNamadanProvinsi()}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="idJabatan">
+                            <option selected th:value="null">Silahkan Pilih Jabatan...</option>
+                            <option th:each="jabatan : ${jabatanAll}" th:value="${jabatan.id}" th:text="${jabatan.nama}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-light">Cari</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="row">
+        <br>
+        <br>
+        <br>
+        <table th:if="${pegawaiFiltered} != null" class="table">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">NIP</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Tempat Lahir</th>
+                <th scope="col">Tanggal Lahir</th>
+                <th scope="col">Tahun Masuk</th>
+                <th scope="col">Nama Instansi</th>
+                <th scope="col">Jabatan</th>
+            </thead>
+            <tr th:each="pegawai, iter : ${pegawaiFiltered}">
+                <th th:text="${iter.index} + 1"></th>
+                <td th:text="${pegawai.nip}"></td>
+                <td th:text="${pegawai.nama}"></td>
+                <td th:text="${pegawai.tempatLahir}"></td>
+                <td th:text="${pegawai.tanggalLahir}"></td>
+                <td th:text="${pegawai.tahunMasuk}"></td>
+                <td th:text="${pegawai.instansi.nama}"></td>
+                <td>
+                    <div th:each="jabatan : ${pegawai.jabatan}">
+                        <li th:text="${jabatan.nama}"></li>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+
+<!--Made with love, by Dihar.-->

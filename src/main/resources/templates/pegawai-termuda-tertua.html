@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="row">
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-header" th:text="'Pegawai Termuda dengan NIP: ' + ${termuda.nip}"></div>
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <td>Nama</td>
+                                <td th:text="${termuda.nama}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tempat Lahir</td>
+                                <td th:text="${termuda.tempatLahir}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Lahir</td>
+                                <td th:text="${termuda.tanggalLahir}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tahun Masuk</td>
+                                <td th:text="${termuda.tahunMasuk}"></td>
+                            </tr>
+                            <tr>
+                                <td>Nama Instansi</td>
+                                <td th:text="${termuda.instansi.nama}"></td>
+                            </tr>
+                            <tr>
+                                <td>Menjabat sebagai</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <ul th:each="jabatan : ${termuda.jabatan}">
+                                                <li th:text="${jabatan.nama}"></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gaji</td>
+                                <td th:text="'Rp.' + ${termuda.gaji}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" th:text="'Pegawai Tertua dengan NIP: ' + ${tertua.nip}">
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <td>Nama</td>
+                                <td th:text="${tertua.nama}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tempat Lahir</td>
+                                <td th:text="${tertua.tempatLahir}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Lahir</td>
+                                <td th:text="${tertua.tanggalLahir}"></td>
+                            </tr>
+                            <tr>
+                                <td>Tahun Masuk</td>
+                                <td th:text="${tertua.tahunMasuk}"></td>
+                            </tr>
+                            <tr>
+                                <td>Nama Instansi</td>
+                                <td th:text="${tertua.instansi.nama}"></td>
+                            </tr>
+                            <tr>
+                                <td>Menjabat sebagai</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <ul th:each="jabatan : ${tertua.jabatan}">
+                                                <li th:text="${jabatan.nama}"></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gaji</td>
+                                <td th:text="'Rp.' + ${tertua.gaji}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</body>
+</html>
+
+<!--Made with love, by Dihar.-->

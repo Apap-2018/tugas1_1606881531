@@ -15,6 +15,7 @@ public class InstansiModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
     @NotNull
@@ -49,6 +50,10 @@ public class InstansiModel implements Serializable {
 
     public String getNama() {
         return nama;
+    }
+
+    public String getNamadanProvinsi() {
+        return getNama() + " - " + getProvinsi().getNama();
     }
 
     public void setNama(String nama) {
