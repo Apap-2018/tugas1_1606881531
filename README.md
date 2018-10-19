@@ -11,5 +11,5 @@ Feature that's done
     8. [x] Menghapus Jabatan
     9. [x] Menampilkan Daftar Jabatan
     10. [x] Menampilkan Pegawai Termuda dan Tertua Di Setiap Instansi
-    11. [x] Menampilkan jumlah pegawai yang mengambil satu jabatan (di jabatan/view)
+    11. [x] Menampilkan jumlah pegawai yang mengambil jabatan tertentu (di jabatan/view)
     12. [x] Page Error Handling and improvements
